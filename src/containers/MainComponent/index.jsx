@@ -14,7 +14,7 @@ class MainComponent extends Component {
      <div>
        <Routes>
          <Route exact path="/" element={<DragAndDropComponent/>} />
-         <Route exact path="/InfoActors" element={<InfoActors />} />
+         <Route exact path="/InfoActors/:actorName" element={<InfoActors />} />
        </Routes>
      </div>
    );

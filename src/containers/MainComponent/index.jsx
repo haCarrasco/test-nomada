@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
+import InfoActors from "../InfoActors/InfoActors";
 import DragAndDropComponent from '../../components/DragAndDropComponent';
+import { Routes, Route  } from "react-router-dom";
+
 
 
 class MainComponent extends Component {
+  
+
  render() {
-  return (
-    <div className='cover-container'>
-     <DragAndDropComponent/>
-    </div>
-  );
+  
+   return (
+     <div>
+       <Routes>
+         <Route exact path="/" element={<DragAndDropComponent/>} />
+         <Route exact path="/InfoActors" element={<InfoActors />} />
+       </Routes>
+     </div>
+   );
  }
 }
 

@@ -7,6 +7,7 @@ import { Divider } from "antd";
 import { Button } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import ListMovies from "../../components/ListMovies/Index";
+import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -16,7 +17,8 @@ const InfoActors = () => {
   const actorNameUnderscore = params.actorName;
   const [actorInfo, setActorInfo] = useState({});
   const [movieInfo, setMovieInfo] = useState(null);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const actorName = actorNameUnderscore.split("_").join(" ");
     const getActorInfo = async () => {
@@ -34,6 +36,10 @@ const InfoActors = () => {
 
     getActorInfo();
   }, [actorNameUnderscore]);
+
+  const returnNavigate = () => {
+    navigate(`/`);
+    }
 
   return (
     <div
@@ -61,7 +67,7 @@ const InfoActors = () => {
       >
         <Content>
           <Row className="head ant-col-24" style={{ display: "flex" }}>
-            <Button
+            <Button onClick={() => returnNavigate()}
               className="btn"
               type="primary"
               style={{ margin: "10px 0 0px 20px" }}

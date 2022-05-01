@@ -11,9 +11,9 @@ class MainComponent extends Component {
  render() {
   
    return (
-     <div>
+     <div className='grey-6'>
        <Routes>
-         <Route exact path="/" element={<DragAndDropComponent/>} />
+         <Route exact path="/" element={<DragAndDropComponent />} />
          <Route exact path="/InfoActors/:actorName" element={<InfoActors />} />
        </Routes>
      </div>

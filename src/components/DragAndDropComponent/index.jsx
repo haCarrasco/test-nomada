@@ -44,7 +44,9 @@ const DragAndDropComponent = () => {
       style={{
         background: "#d9d9d9",
         height: "800px",
-        padding: "180px 0 0 230px",
+        width:1400,
+        padding: "180px 0 0 200px",
+        margin: 0,
         textAlign: "center",
       }}
     >

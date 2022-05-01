@@ -3,19 +3,20 @@ import { Card } from "antd";
 import { Row, Col, Layout } from "antd";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Divider } from 'antd';
+import { Divider } from "antd";
 import { Button } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import  ListMovies  from "../../components/DragAndDropComponent/ListMovies";
+import ListMovies from "../../components/ListMovies/Index";
 
 const { Content } = Layout;
+const { Meta } = Card;
 
 const InfoActors = () => {
   const params = useParams();
   const actorNameUnderscore = params.actorName;
   const [actorInfo, setActorInfo] = useState({});
-  
-  
+  const [movieInfo, setMovieInfo] = useState(null);
+
   useEffect(() => {
     const actorName = actorNameUnderscore.split("_").join(" ");
     const getActorInfo = async () => {
@@ -24,14 +25,15 @@ const InfoActors = () => {
       );
       if (res.status === 200) {
         const resActorInfo = res.data.results[0];
+        const resMovieInfo = resActorInfo.known_for;
         setActorInfo(resActorInfo);
+        setMovieInfo(resMovieInfo);
+
       }
     };
 
     getActorInfo();
   }, [actorNameUnderscore]);
-
-  
 
   return (
     <div
@@ -39,10 +41,10 @@ const InfoActors = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        width: "100%",
+        width: "1400px",
         background: "#d9d9d9",
         height: "800px",
-        padding: "70px 280px 0 80px",
+        padding: "70px 195px 0 80px",
       }}
     >
       <Col
@@ -50,7 +52,7 @@ const InfoActors = () => {
         xs={{ span: 8, offset: 2 }}
         style={{
           background: "white",
-          width: "600px",
+          width: "720px",
           height: "600px",
           justifyContent: "center",
           paddingTop: "15px",
@@ -72,15 +74,25 @@ const InfoActors = () => {
               style={{
                 width: 200,
                 height: 250,
-                marginLeft: 60,
-                marginRight: -51,
+                marginLeft: 40,
+                marginRight: -32,
+                marginTop: -24,
                 border: "1px solid rgba(140, 140, 140, 0.35)",
               }}
-              cover={<img alt="example" src={actorInfo.poster_path} />}
-            ></Card>
-            {actorInfo.id}
-
-            <ListMovies />
+              cover={
+                <img
+                  alt="example"
+                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                />
+              }
+            >
+              <Meta
+                title={actorInfo.id}
+                description="www.instagram.com"
+                style={{ textAlign: "center" }}
+              />
+            </Card>
+            <ListMovies listMovies={movieInfo} />
           </Row>
         </Content>
       </Col>

@@ -16,23 +16,22 @@ const DragAndDropComponent = () => {
     Nomada: process.env.REACT_APP_NOMADA_KEY,
   };
 
-  const onDrop = (e) => {
-    console.log("Dropped files", e.dataTransfer.files);
-  };
 
   const onChange = (info) => {
     const { status } = info.file;
-    if (status === "uploading") {
-      console.log("estoy in uploading!!");
-      console.log(status);
-    }
+
     if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
       const { response } = info.file;
       const { actorName } = response;
-      const actorNameUnderscore = actorName.split(" ").join("_");
+      if(actorName !== ""){
+        const actorNameUnderscore = actorName.split(" ").join("_");
+        navigate(`/infoActors/${actorNameUnderscore}`);
+      } else {
+        message.error("No se pudo detectar actor en la imagen")
+      }
+      
 
-      navigate(`/infoActors/${actorNameUnderscore}`);
-      message.success(`${info.file.name} file uploaded successfully.`);
     } else if (status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
@@ -44,7 +43,7 @@ const DragAndDropComponent = () => {
       style={{
         background: "#d9d9d9",
         height: "800px",
-        width:1400,
+        width: 1400,
         padding: "180px 0 0 200px",
         margin: 0,
         textAlign: "center",
@@ -71,7 +70,14 @@ const DragAndDropComponent = () => {
                 action={action}
                 headers={headers}
                 multiple={false}
-                onDrop={onDrop}
+                accept={"image/*"}
+                beforeUpload={(file) => {
+                  const isImage = /image\/*/.test(file.type);
+                  if (!isImage) {
+                    message.error(`${file.name} is not an image file`)
+                  } 
+                  return isImage;
+                }}
               >
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined />

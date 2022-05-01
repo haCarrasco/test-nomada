@@ -12,13 +12,15 @@ import { useNavigate } from "react-router-dom";
 const { Content } = Layout;
 const { Meta } = Card;
 
+const gender = { "1": "Mujer", "2": "Hombre" }
+
 const InfoActors = () => {
   const params = useParams();
   const actorNameUnderscore = params.actorName;
   const [actorInfo, setActorInfo] = useState({});
   const [movieInfo, setMovieInfo] = useState(null);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const actorName = actorNameUnderscore.split("_").join(" ");
     const getActorInfo = async () => {
@@ -39,7 +41,7 @@ const InfoActors = () => {
 
   const returnNavigate = () => {
     navigate(`/`);
-    }
+  }
 
   return (
     <div
@@ -75,29 +77,30 @@ const InfoActors = () => {
               <ArrowLeftOutlined /> Regresar
             </Button>
             <Divider />
-            <Card
-              hoverable
-              style={{
-                width: 200,
-                height: 250,
-                marginLeft: 40,
-                marginRight: -32,
-                marginTop: -24,
-                border: "1px solid rgba(140, 140, 140, 0.35)",
-              }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta
-                title={actorInfo.id}
-                description="www.instagram.com"
-                style={{ textAlign: "center" }}
-              />
-            </Card>
+            <Layout>
+              <Card
+                hoverable
+                style={{
+                  width: 200,
+                  marginLeft: 40,
+                  marginRight: -32,
+                  marginTop: -24,
+                  border: "1px solid rgba(140, 140, 140, 0.35)",
+                }}
+                cover={
+                  <img
+                    alt="example"
+                    src={`https://image.tmdb.org/t/p/w500/${actorInfo.profile_path}`}
+                  />
+                }
+              >
+          
+              </Card>
+              <h1>{actorInfo.name}</h1>
+              <div>{gender[actorInfo.gender]}</div>
+              <h4 >Popularidad: {actorInfo.popularity}</h4>
+            </Layout>
+
             <ListMovies listMovies={movieInfo} />
           </Row>
         </Content>

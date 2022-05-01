@@ -10,21 +10,27 @@ const ListMovies = ({ listMovies }) => {
       </div>
       {listMovies &&
         listMovies.map((movie) => {
-          const releaseDateArray = movie.release_date.split("-");
-          const year = parseInt(releaseDateArray[0], 10);
-          const month = parseInt(releaseDateArray[1], 10);
-          const day = parseInt(releaseDateArray[2], 10);
-          const event = new Date(Date.UTC(year, month, day));
-          const options = {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          };
+          let parsedDate = "";
+          const releaseDate = movie.release_date || movie.first_air_date;
 
-          const parsedDate = event.toLocaleDateString("es-MX", options);
+          if (releaseDate) {
+            const releaseDateArray = releaseDate.split("-");
+            const year = parseInt(releaseDateArray[0], 10);
+            const month = parseInt(releaseDateArray[1], 10);
+            const day = parseInt(releaseDateArray[2], 10);
+            const event = new Date(Date.UTC(year, month, day));
+            const options = {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            };
+
+            parsedDate = event.toLocaleDateString("es-MX", options);
+          }
+
           return (
             <div className="body-title" key={movie.poster_path}>
-              <h1>{movie.original_title}</h1>
+              <h1>{movie.original_title || movie.original_name || ("(no title)")}</h1>
               <div className="score">
                 {movie.vote_average}/10
                 <span>
@@ -39,9 +45,9 @@ const ListMovies = ({ listMovies }) => {
               </div>
 
               <p className="info-movie">{movie.overview}</p>
-              <p className="release-date">
+              {parsedDate !== "" && <p className="release-date">
                 <strong>Fecha de estreno: {parsedDate}</strong>
-              </p>
+              </p>}
             </div>
           );
         })}

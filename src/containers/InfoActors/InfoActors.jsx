@@ -77,7 +77,7 @@ const InfoActors = () => {
               <ArrowLeftOutlined /> Regresar
             </Button>
             <Divider />
-            <Layout>
+            <Layout style={{background:"#fff"}}>
               <Card
                 hoverable
                 style={{
@@ -94,11 +94,11 @@ const InfoActors = () => {
                   />
                 }
               >
-          
+                <h1 style={{ textAlign: "center" }}><strong>{actorInfo.name}</strong></h1>
+                <div style={{ textAlign: "center", background:"#d46b08"}}>{gender[actorInfo.gender]}</div>
+                <h4 style={{ textAlign: "center" }}>Popularidad: {actorInfo.popularity}</h4>
               </Card>
-              <h1>{actorInfo.name}</h1>
-              <div>{gender[actorInfo.gender]}</div>
-              <h4 >Popularidad: {actorInfo.popularity}</h4>
+              
             </Layout>
 
             <ListMovies listMovies={movieInfo} />

@@ -1,12 +1,13 @@
 .container-main{
  display: block;
- background: gray;
+ background: #fff;
  width: 677px;
  height: 490px;
  margin-top: -24px;
  margin-left: 60px;
  border-left: 0.5px solid rgba(140, 140, 140, 0.35);
-
+ overflow-y: scroll;
+ scrollbar-width: none;
 }
 
 .header{

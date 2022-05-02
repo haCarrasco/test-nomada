@@ -8,16 +8,16 @@ import { Routes, Route  } from "react-router-dom";
 class MainComponent extends Component {
   
 
- render() {
+  render() {
   
-   return (
-     <div className='grey-6'>
-       <Routes>
-         <Route exact path="/" element={<DragAndDropComponent />} />
-         <Route exact path="/InfoActors/:actorName" element={<InfoActors />} />
-       </Routes>
-     </div>
-   );
+    return (
+      <div style={{ height: "100vh" }}>
+        <Routes>
+          <Route exact path="/" element={<DragAndDropComponent />} />
+          <Route exact path="/InfoActors/:actorName" element={<InfoActors />} />
+        </Routes>
+      </div>
+    );
  }
 }
 

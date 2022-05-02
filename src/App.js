@@ -12,7 +12,6 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <MainComponent />
-          
         </div>
       </BrowserRouter>
     );

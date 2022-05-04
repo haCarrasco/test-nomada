@@ -10,7 +10,7 @@ import ListMovies from "../../components/ListMovies/Index";
 import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
-const { Meta } = Card;
+
 
 const gender = { "1": "Mujer", "2": "Hombre" }
 
